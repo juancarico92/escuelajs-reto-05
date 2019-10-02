@@ -24,13 +24,28 @@ const getData = api => {
 }
 
 const loadData = () => {
+  localStorage.setItem('next_fetch', API);
+  (() => {
+    console.log(`API (next_fetch) en localStorage: ${localStorage.getItem('next_fetch')}`);
+  })();
   getData(API);
-}
+};
+
+// //
+// const loadData = async () => {
+//   let localStorage = await localStorage.setItem('next_fetch', API);
+//   (() => {
+//     console.log(`API (next_fetch) en localStorage: ${localStorage.getItem('next_fetch')}`);
+//   })();
+//   getData(API);
+// }
+// //
+
 
 const intersectionObserver = new IntersectionObserver(entries => {
   if (entries[0].isIntersecting) {
     loadData();
-  }
+  } 
 }, {
   rootMargin: '0px 0px 100% 0px',
 });
