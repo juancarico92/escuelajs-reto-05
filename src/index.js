@@ -26,20 +26,22 @@ const getData = api => {
 const loadData = () => {
   localStorage.setItem('next_fetch', API);
   (() => {
-    console.log(`API (next_fetch) en localStorage: ${localStorage.getItem('next_fetch')}`);
+    console.log(`API (next_fetch) in localStorage: ${localStorage.getItem('next_fetch')}`);
   })();
   getData(API);
 };
 
-// //
-// const loadData = async () => {
-//   let localStorage = await localStorage.setItem('next_fetch', API);
-//   (() => {
-//     console.log(`API (next_fetch) en localStorage: ${localStorage.getItem('next_fetch')}`);
-//   })();
-//   getData(API);
-// }
-// //
+
+
+function cleanLocalStorage() {
+  try {
+    localStorage.removeItem('next_fetch');
+  } catch {
+    error => console.error(error);
+  }
+  return console.log('localStorage is clean');
+}
+
 
 
 const intersectionObserver = new IntersectionObserver(entries => {
@@ -49,5 +51,7 @@ const intersectionObserver = new IntersectionObserver(entries => {
 }, {
   rootMargin: '0px 0px 100% 0px',
 });
+
+
 
 intersectionObserver.observe($observe);
